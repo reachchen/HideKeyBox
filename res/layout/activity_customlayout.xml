@@ -6,7 +6,7 @@
         android:layout_height="match_parent">
         <ScrollView 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
         <LinearLayout 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -17,15 +17,11 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:hint="请输入..."/>
-        
         <Button 
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="50dp"
-            android:layout_below="@+id/et_inputneirong"
-            android:visibility="gone"
+            android:layout_marginTop="300dp"
             android:text="登录按钮"/>
         </LinearLayout>
         </ScrollView>

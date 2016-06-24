@@ -30,15 +30,11 @@ public class CustomLayoutActivity extends Activity implements OnClickListener{
 			super.handleMessage(msg);
 			switch (msg.what) {
 			case KEYBOX_SHOW:
-				int keyboxbottom = keyboxlayout.getBottom();
-//				keyboxlayout.setPadding(0,keyboxbottom-btn_bottom, 0, 0);
 				Toast.makeText(CustomLayoutActivity.this, "键盘弹出", 0).show();
 				break;
 			case KEYBOX_HIDE:
-				keyboxlayout.setPadding(0, 0, 0, 0);
 				Toast.makeText(CustomLayoutActivity.this, "键盘隐藏", 0).show();
 				break;
-
 			default:
 				break;
 			}
@@ -56,15 +52,14 @@ public class CustomLayoutActivity extends Activity implements OnClickListener{
 		keyboxlayout.setOnSizeChangedListener(new onSizeChangedListener() {
 			
 			@Override
-			public void onChanged(int showKeyboard) {
+			public void onChanged(boolean showKeyboard) {
 				// TODO Auto-generated method stub
-				if(showKeyboard ==0){
-					Log.i("TAG--->", "布局改变的标志1"+showKeyboard);
-				}else if(showKeyboard==1){
-					Log.i("TAG--->", "布局改变的标志2"+showKeyboard);
-//					mHandler.sendMessage(mHandler.obtainMessage(KEYBOX_HIDE));
-				}else if(showKeyboard==2){
-					Log.i("TAG--->", "布局改变的标志3"+showKeyboard);
+				if(showKeyboard){
+					
+					mHandler.sendEmptyMessage(KEYBOX_SHOW);
+					
+				}else {
+					mHandler.sendEmptyMessage(KEYBOX_HIDE);
 				}
 			}
 		});

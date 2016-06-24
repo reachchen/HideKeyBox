@@ -13,10 +13,7 @@ public class KeyBoxLayout extends RelativeLayout {
 	
 	private onSizeChangedListener mChangedlistener;
 	
-	private boolean mHasInit = false;
-	private boolean mHasKeyboard = false;
-
-	private int mHeight;
+	private boolean mShowKeyboard;
 
 	public KeyBoxLayout(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
@@ -43,44 +40,25 @@ public class KeyBoxLayout extends RelativeLayout {
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		// TODO Auto-generated method stub
 		super.onLayout(changed, l, t, r, b);
-		Log.e(TAG, "onLayout-------"+"第一个参数"+l+"第二个参数"+t+"第三个参数"+r+"第四个参数"+b);
-		if(!mHasInit) {
-			mHasInit = true;
-			mHeight = b;
-			
-			if(mChangedlistener != null) {
-				
-				mChangedlistener.onChanged(0);
-			}
-			
-		} else {
-			mHeight = mHeight < b ? b : mHeight;
-		}
+		Log.e(TAG, "onLayout-------");
 		
-		if(mHasInit && mHeight > b) {
-			mHasKeyboard = true;
-			if(mChangedlistener != null) {
-				mChangedlistener.onChanged(1);
-			}
-		}
-		if(mHasInit && mHasKeyboard && mHeight == b) {
-			mHasKeyboard = false;
-			if(mChangedlistener != null) {
-				mChangedlistener.onChanged(2);
-			}
-		}
 	}
 	
 	
-//    @Override
-//    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-//    	// TODO Auto-generated method stub
-//    	int w_cha = w-oldw;
-//    	int h_cha = h-oldh;
-//    	Log.e(TAG, "onSizeChanged--------"+"宽度的变化"+w_cha+"高度的变化"+h_cha);
-//    	super.onSizeChanged(w, h, oldw, oldh);
-//    	
-//    }
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    	// TODO Auto-generated method stub
+    	super.onSizeChanged(w, h, oldw, oldh);
+    	Log.e(TAG, "w----" + w + "\n" + "h-----" + h + "\n" + "oldW-----" + oldw + "\noldh----" + oldh);
+         if (null != mChangedlistener && 0 != oldw && 0 != oldh) {
+             if (h < oldh) {
+                 mShowKeyboard = true;
+             } else {
+                 mShowKeyboard = false;
+             }
+             mChangedlistener.onChanged(mShowKeyboard);
+         }
+    }
 	
     public void  setOnSizeChangedListener(onSizeChangedListener listener){
     	

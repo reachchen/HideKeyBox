@@ -3,5 +3,5 @@ package com.andychen.hidekeybox.listener;
 public interface onSizeChangedListener {
 
 	
-	void onChanged(int showKeyboard);
+	void onChanged(boolean showKeyboard);
 }
